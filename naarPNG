@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in $1/*.jpg; 
+do
+	newI=${i/.jpg}
+	echo $i
+	convert $i -resize 128x128 $newI.png
+done

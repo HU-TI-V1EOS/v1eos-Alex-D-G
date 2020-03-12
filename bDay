@@ -1,0 +1,50 @@
+#!/bin/bash
+
+echo "In welke maand ben je geboren? (jan=1, feb=2, etc.)"
+read maand
+echo Op welke dag ben je geboren?
+read dag
+
+maandDagen=(0 31 29 31 30 31 30 31 31 30 31 30 31)
+eval $(date +"dateM=%m dateD=%d")
+dateM=${dateM#0} 
+dateD=${dateD#0}
+
+if [ $maand -gt 12 ] || [ $maand -lt 1 ]
+then
+	echo Dat is geen waardige maand!
+	exit
+fi
+
+if [ $dag -gt ${maandDagen[$maand]} ] || [ $dag -lt 1 ]
+then
+	echo "Er is geen $dag in die maand!"
+	exit
+fi
+
+if [ $maand -lt $dateM ]
+then
+	echo Je bent dit jaar al jarig geweest!
+else
+	if [ $maand -eq $dateM ] && [ $dateD -lt $dag ]
+	then
+		echo je bent jarig over $(($dag-$dateD)) dagen!
+	else
+		dagen=0
+		for (( i=$dateM; i<=$maand; i++))
+		do
+			if [ $i -eq $dateM ]
+			then
+				dagen=$(( dagen + ${maandDagen[$i]} - $dateD ))
+			else
+				if [ $i -eq $maand  ]
+				then
+					dagen=$(( dagen+$dag  ))
+				else
+					dagen=$(( dagen+${maandDagen[$i]} ))
+				fi
+			fi
+		done
+	echo je bent over $dagen dagen jarig!
+	fi
+fi

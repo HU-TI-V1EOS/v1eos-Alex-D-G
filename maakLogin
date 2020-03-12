@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo Geef username:
+read name;
+
+if [ -z "$name" ]
+then
+	name=$(whoami)
+fi 
+echo Welkom $name! 
+index=0
+while [ "$index" -eq 0 ]
+do
+	echo Geef wachtwoord "(min 8 characters):"
+	read password
+	if [ "${#password}" -gt 7 ]
+	then
+		echo Confirm password:
+		read newPassword
+		if [ "$newPassword" = "$password" ]
+		then
+			echo Gegevens opgeslagen
+			echo Username: $name >> $1
+			password=$(basename "$password" | md5sum)
+			echo Password: $password >> $1
+			index=1
+		else
+			echo Incorrect wachtwoord
+		fi
+	else
+		echo Password te klein,
+	fi 
+done
+echo All "done!"

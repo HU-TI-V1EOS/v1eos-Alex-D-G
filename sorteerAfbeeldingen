@@ -1,0 +1,19 @@
+#!/bin/bash
+#if [ $# -ge 1 ];
+#then
+#	mkdir -p $1/afbeeldingen
+#	for i in $(find $1 -name '*.jpg' -o -name '*.png')
+#	do
+#		mv $i $1/afbeeldingen
+#	done
+#else echo 'Error'
+#fi
+
+if [ $# -ge 1 ];
+then
+       mkdir -p $1 /afbeeldingen
+       find  $(find $1 -name '*.jpg' -o -name '*.png') -exec mv {} $1/afbeeldingen \;
+
+else echo 'Error'
+fi
+

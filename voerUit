@@ -1,0 +1,18 @@
+#!/bin/bash
+case $1 in
+	*.py)
+		python3 $PWD'/'$1
+		echo "Done!"
+	;;
+        *.sh) 
+                bash $PWD'/'$1
+                echo "Done!"
+        ;;
+        *.cc) 
+                cat $PWD'/'$1
+                echo "Done!"
+        ;;
+	*)
+		echo "Error: type not found"
+	;;
+esac

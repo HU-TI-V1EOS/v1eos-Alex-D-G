@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm -f $PWD/$3
+touch $3
+
+for i in $1/*;
+do
+	filename=${i/$1"/"}
+	$2 $i
+	if [ $? -eq 0 ]
+	then
+		echo $filename " is uitvoerbaar" >> $3
+	else
+		echo $filename " is niet uitvoerbaar" >> $3
+	fi
+done
+
