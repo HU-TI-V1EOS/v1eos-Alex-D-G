@@ -2,7 +2,18 @@
 #include <string>
 
 std::string translate(std::string line, std::string argument){
-	std::string result = "Wow"; // implementeer dit
+	std::string result = "";
+	int index=0;
+	while(index==0){
+		size_t area = argument.find(line);
+		if(area!=std::string::npos){
+			argument.erase(area, line.length());
+		}
+		else{
+			index=1;
+		}
+	}
+	result = argument;
 	return result;
 }
 
